@@ -62,7 +62,7 @@ export default function TodoListItem({
       </div>
       <input
         ref={editInputRef}
-        className="edit-input1"
+        className="edit-input"
         type="text"
         value={editedTodo.title}
         onChange={handleEditing}
