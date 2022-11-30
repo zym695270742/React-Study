@@ -1,0 +1,12 @@
+li.todo-list-item .edit-input {
+  display: none;
+}
+li.todo-list-item.editing .edit-input {
+  display: block;
+}
+li.todo-list-item.editing .view {
+  display: none;
+}
+li.todo-list-item.completed .view span {
+  text-decoration: line-through;
+}

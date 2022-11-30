@@ -1,14 +1,14 @@
 import { useState } from 'react'
 
-export default function useTodos() {
-  const [todos, setTodos] = useState([])
+export default function useTodos(initialState) {
+  const [todos, setTodos] = useState(initialState || [])
 
   //add
   const addTodos = (val) => {
     setTodos([
       ...todos,
       {
-        id: todos.length + 1,
+        id: new Date().getTime(),
         title: val,
         completed: false,
       },
@@ -21,7 +21,11 @@ export default function useTodos() {
   }
 
   //update
-  const updateTodos = () => {}
+  const updateTodos = (editedTodo) => {
+    const todo = todos.find((item) => item.id === editedTodo.id)
+    Object.assign(todo, editedTodo)
+    setTodos([...todos])
+  }
 
   return { todos, addTodos, deleteTodos, updateTodos }
 }
