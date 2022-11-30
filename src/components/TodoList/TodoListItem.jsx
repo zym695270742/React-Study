@@ -1,6 +1,12 @@
 import React, { useEffect, useRef } from 'react'
 
-export default function TodoListItem({ todo, deleteTodos, editedTodo, setEditedTodo, updateTodos }) {
+export default function TodoListItem({
+  todo,
+  deleteTodos,
+  editedTodo,
+  setEditedTodo,
+  updateTodos,
+}) {
   const editInputRef = useRef()
 
   useEffect(() => {
@@ -42,13 +48,27 @@ export default function TodoListItem({ todo, deleteTodos, editedTodo, setEditedT
   }
 
   return (
-    <li className={['todo-list-item', editedTodo?.id === todo.id ? 'editing' : '', todo.completed ? 'completed' : ''].join(' ')}>
+    <li
+      className={[
+        'todo-list-item',
+        editedTodo?.id === todo.id ? 'editing' : '',
+        todo.completed ? 'completed' : '',
+      ].join(' ')}
+    >
       <div className="view">
         <span onDoubleClick={handleEditTodo}>{todo.title}</span>
         <button onClick={handleDeleteTodos}>X</button>
         {!todo.completed && <button onClick={handleDone}>Done</button>}
       </div>
-      <input ref={editInputRef} className="edit-input" type="text" value={editedTodo.title} onChange={handleEditing} onKeyUp={handleUpdateTodo} onBlur={handleCancelEdit} />
+      <input
+        ref={editInputRef}
+        className="edit-input1"
+        type="text"
+        value={editedTodo.title}
+        onChange={handleEditing}
+        onKeyUp={handleUpdateTodo}
+        onBlur={handleCancelEdit}
+      />
     </li>
   )
 }
