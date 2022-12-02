@@ -1,12 +1,9 @@
 import React, { useEffect, useRef } from 'react'
+import { useDispatch } from 'react-redux'
+import { deleteTodo, updateTodo } from '../../store/todoSlice'
 
-export default function TodoListItem({
-  todo,
-  deleteTodos,
-  editedTodo,
-  setEditedTodo,
-  updateTodos,
-}) {
+export default function TodoListItem({ todo, editedTodo, setEditedTodo }) {
+  const dispatch = useDispatch()
   const editInputRef = useRef()
 
   useEffect(() => {
@@ -16,7 +13,7 @@ export default function TodoListItem({
   }, [editedTodo])
 
   const handleDeleteTodos = () => {
-    deleteTodos(todo.id)
+    dispatch(deleteTodo(todo.id))
   }
   const handleEditTodo = () => {
     setEditedTodo(todo)
@@ -30,7 +27,7 @@ export default function TodoListItem({
 
   const handleUpdateTodo = (e) => {
     if (e.code === 'Enter' && editedTodo.title) {
-      updateTodos(editedTodo)
+      dispatch(updateTodo(editedTodo))
       setEditedTodo({})
     }
   }
@@ -40,10 +37,7 @@ export default function TodoListItem({
   }
 
   const handleDone = () => {
-    updateTodos({
-      ...todo,
-      completed: true,
-    })
+    dispatch(updateTodo({ ...todo, completed: true }))
     setEditedTodo({})
   }
 
@@ -51,7 +45,7 @@ export default function TodoListItem({
     <li
       className={[
         'todo-list-item',
-        editedTodo?.id === todo.id ? 'editing' : '',
+        editedTodo.id === todo.id ? 'editing' : '',
         todo.completed ? 'completed' : '',
       ].join(' ')}
     >
